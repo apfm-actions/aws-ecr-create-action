@@ -30,6 +30,6 @@ if aws ecr create-repository --repository-name "${GITHUB_PROJECT}"; then
 fi
 
 if ECR_JSON="$(aws ecr describe-repositories --output=json --repository-name "${GITHUB_PROJECT}")"; then
-	echo "::set-output name=uri::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryUri')"
-	echo "::set-output name=arn::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryArn')"
+	echo "::set-output name=uri::$(echo "${ECR_JSON}" | jq -r '.repositories[0].repositoryUri')"
+	echo "::set-output name=arn::$(echo "${ECR_JSON}" | jq -r '.repositories[0].repositoryArn')"
 fi
