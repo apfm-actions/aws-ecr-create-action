@@ -25,8 +25,11 @@ if test "${INPUT_DEBUG}" = 'true'; then
        	set -x
 fi
 
-ECR_JSON="$(aws ecr create-repository --repository-name "${GITHUB_PROJECT}")"
+if aws ecr create-repository --repository-name "${GITHUB_PROJECT}"; then
+	aws ecr set-repository-policy --repository-name "${GITHUB_PROJECT}" --policy-text "$(ecr_perms)"
+fi
+
+ECR_JSON="$(aws ecr describe-repositories --repository-name "${GITHUB_PROJECT}" 2>/dev/null)"
 test "$?" -eq '0' || exit
-aws ecr set-repository-policy --repository-name "${GITHUB_PROJECT}" --policy-text "$(ecr_perms)"
 echo "::set-output name=ecr_uri::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryUri')"
 echo "::set-output name=ecr_arn::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryArn')"
