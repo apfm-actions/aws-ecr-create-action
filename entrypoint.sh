@@ -29,7 +29,7 @@ if aws ecr create-repository --repository-name "${GITHUB_PROJECT}"; then
 	aws ecr set-repository-policy --repository-name "${GITHUB_PROJECT}" --policy-text "$(ecr_perms)"
 fi
 
-ECR_JSON="$(aws ecr describe-repositories --repository-name "${GITHUB_PROJECT}" 2>/dev/null)"
+ECR_JSON="$(aws ecr describe-repositories --output=json --repository-name "${GITHUB_PROJECT}")"
 test "$?" -eq '0' || exit
 echo "::set-output name=uri::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryUri')"
 echo "::set-output name=arn::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryArn')"
