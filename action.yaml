@@ -1,0 +1,10 @@
+# action.yml
+name: 'AWS ECR Create'
+description: 'Create an ECR repo in AWS'
+inputs:
+  allowed_accounts:
+    description: List of AWS account id's that have read access to this repo
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
