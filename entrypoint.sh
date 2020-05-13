@@ -31,5 +31,5 @@ fi
 
 ECR_JSON="$(aws ecr describe-repositories --repository-name "${GITHUB_PROJECT}" 2>/dev/null)"
 test "$?" -eq '0' || exit
-echo "::set-output name=ecr_uri::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryUri')"
-echo "::set-output name=ecr_arn::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryArn')"
+echo "::set-output name=uri::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryUri')"
+echo "::set-output name=arn::$(echo "${ECR_JSON}" | jq -r '.repository.repositoryArn')"
