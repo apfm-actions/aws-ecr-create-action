@@ -26,7 +26,7 @@ if test "${INPUT_DEBUG}" = 'true'; then
 fi
 
 if aws ecr create-repository --repository-name "${GITHUB_PROJECT}"; then
-	aws ecr set-repository-policy --repository-name "${GITHUB_PROJECT}" --policy-text "$(ecr_perms)"
+	aws ecr set-repository-policy --repository-name "${GITHUB_PROJECT}" --policy-text "$(ecr_perms ${INPUT_ALLOWED_ACCOUNTS})"
 fi
 
 if ECR_JSON="$(aws ecr describe-repositories --output=json --repository-name "${GITHUB_PROJECT}")"; then
