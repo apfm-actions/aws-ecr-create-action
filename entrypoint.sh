@@ -32,4 +32,5 @@ fi
 if ECR_JSON="$(aws ecr describe-repositories --output=json --repository-name "${GITHUB_PROJECT}")"; then
 	echo "::set-output name=uri::$(echo "${ECR_JSON}" | jq -r '.repositories[0].repositoryUri')"
 	echo "::set-output name=arn::$(echo "${ECR_JSON}" | jq -r '.repositories[0].repositoryArn')"
+	echo "::set-output name=label::$(printf '%.8s' "${GITHUB_SHA}")"
 fi

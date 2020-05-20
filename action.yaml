@@ -12,6 +12,9 @@ outputs:
   uri:
     description: Docker URI of the ECR repository
 
+  label:
+    description: A suggested ECR label derrived from the git revision
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
