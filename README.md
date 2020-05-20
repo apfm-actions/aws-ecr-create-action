@@ -1,10 +1,15 @@
 AWS ECR Create Action
 =====================
 
-This GitHub Action creates an AWS ECR repo based on the GITHUB_REPOSITORY.
+This [GitHub Action][GitHub Actions] creates an AWS ECR repo based on the
+`GITHUB_REPOSITORY`.
 
 This action expects AWS credentials to have already been initialized.
-See: https://github.com/aws-actions/configure-aws-credentials
+
+See also:
+- https://github.com/aws-actions/configure-aws-credentials
+- https://github.com/apfm-actions
+- https://help.github.com/en/actions
 
 Usage
 -----
@@ -34,3 +39,24 @@ A list of AWS Account ID's that should be granted read access to this repository
 Enable debugging
 - required: false
 - default: false
+
+Outputs
+-------
+
+### arn
+AWS ARN of the ECR repository
+
+### uri
+Docker URI of the ECR repository
+
+### label
+ suggested ECR label derrived from the git revision
+
+[//]: # (The following are reference links used elsewhere in the document)
+
+[Git]: https://git-scm.com/
+[GitHub]: https://www.github.com
+[GitHub Actions]: https://help.github.com/en/actions
+[Terraform]: https://www.terraform.io/
+[Docker]: https://www.docker.com
+[Dockerfile]: https://docs.docker.com/engine/reference/builder/
