@@ -11,11 +11,12 @@ ecr_perms()
 {
 	_ecr_perms_sid='1'
         _ecr_perms='{ "Version" : "2008-10-17", "Statement" : [ '
-	while test "$#" -gt '1'; do
-                _ecr_perms="${_ecr_perms} $(printf '{ "Sid" : "allowed-account-", "Effect" : "Allow", "Principal" : { "AWS" : "arn:aws:iam::%s:root" }, "Action" : [ "ecr:BatchCheckLayerAvailability", "ecr:BatchGetImage", "ecr:GetDownloadUrlForLayer" ] },' "${_ecr_perms_sid}" "${1}")"
+	while test "$#" -gt '0'; do
+                _ecr_perms="${_ecr_perms} $(printf '{ "Sid" : "allowed-account-%d", "Effect" : "Allow", "Principal" : { "AWS" : "arn:aws:iam::%s:root" }, "Action" : [ "ecr:BatchCheckLayerAvailability", "ecr:BatchGetImage", "ecr:GetDownloadUrlForLayer" ] },' "${_ecr_perms_sid}" "${1}")"
 		_ecr_perms_sid="$((${_ecr_perms_sid} + 1))"
+                shift
         done
-        ECR_PERMS="${ECR_PERMS%,} ]}"
+        ECR_PERMS="${_ecr_perms%,} ]}"
         printf "${ECR_PERMS}"
 }
 
