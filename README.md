@@ -31,7 +31,7 @@ Inputs
 ------
 
 ### allowed_accounts
-A list of AWS Account ID's that should be granted read access to this repository.
+A *SPACE SEPARATED* list of AWS Account ID's that should be granted read access to this repository.
 - required: false
 - default: N/A
 
